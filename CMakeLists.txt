@@ -18,6 +18,7 @@ FetchContent_GetProperties(googletest)
 if(NOT googletest_POPULATED)
   FetchContent_Populate(googletest)
   add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+  target_compile_options(gtest PRIVATE -Wno-maybe-uninitialized)
   target_compile_options(gtest_main PRIVATE -Wno-maybe-uninitialized)
 endif()
 
