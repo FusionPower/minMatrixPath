@@ -30,7 +30,7 @@ std::pair <T, std::vector<std::pair<int, int>>> smallestSum(std::vector<std::vec
     }
     int i = n-1;
 	int j = n-1;
-	while (i!=0 || j!=0) {
+	while (~i!=0 && ~j!=0) {
 		if (matrix[i][j]<0){
 			path.push_back(std::make_pair(i, j));
 			j-=1;
@@ -39,6 +39,7 @@ std::pair <T, std::vector<std::pair<int, int>>> smallestSum(std::vector<std::vec
 			path.push_back(std::make_pair(i, j));
 			i-=1;
 		}
+
 	}
 	std::reverse(path.begin(), path.end());
     return {std::abs(matrix[n-1][n-1]), path};
