@@ -1,0 +1,35 @@
+name: C++ CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1.4
+
+    - name: Set up GoogleTest
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+        sudo make install
+
+    - name: Create Build Directory
+      run: mkdir build
+
+    - name: Build Project
+      run: |
+        cd build
+        cmake ..
+        make
+
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure
