@@ -14,15 +14,6 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install cmake
 
-
-    - name: Set up GoogleTest
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        make
-        sudo make install
-
     - name: Create Build Directory
       run: mkdir build
 
@@ -36,3 +27,4 @@ jobs:
       run: |
         cd build
         ctest --output-on-failure
+
