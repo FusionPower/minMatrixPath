@@ -14,16 +14,20 @@ FetchContent_Declare(
 )
 
 # Fetch GoogleTest
-FetchContent_MakeAvailable(googletest)
+FetchContent_GetProperties(googletest)
+if(NOT googletest_POPULATED)
+  FetchContent_Populate(googletest)
+  add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+  target_compile_options(gtest_main PRIVATE "-Wno-maybe-uninitialized")
+endif()
 
 # Set the C++ standard version
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # Include directories
 include_directories(${PROJECT_SOURCE_DIR})
 
 # Add your .cpp file
-add_definitions(-Wno-maybe-uninitialized)
 add_executable(MatrixPathTest
     matrixPath_test.cpp
 )
