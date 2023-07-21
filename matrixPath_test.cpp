@@ -69,6 +69,35 @@ TEST(findMinPathTest, HandlesThreeByThreeMatrixPathDouble) {
   EXPECT_EQ(result.second, path);
 }
 
+// Test nevativity of elements.
+TEST(findMinPathTest, HandlesNegativeElement) {
+  std::vector<std::vector<int>> matrix = {{1, 3, 1}, {1, -5, 1}, {4, 2, 1}};
+  EXPECT_THROW(findMinPath<int>(matrix), std::invalid_argument);
+}
+
+// Test negative element in first row.
+TEST(findMinPathTest, HandlesNegativeElementFirstRow) {
+  std::vector<std::vector<int>> matrix = {{1, 3, 1}, {-1, 5, 1}, {4, 2, 1}};
+  EXPECT_THROW(findMinPath<int>(matrix), std::invalid_argument);
+}
+
+// Test negative element in first column.
+TEST(findMinPathTest, HandlesNegativeElementFirstColumn) {
+  std::vector<std::vector<int>> matrix = {{1, 3, 1}, {1, 5, 1}, {-4, 2, 1}};
+  EXPECT_THROW(findMinPath<int>(matrix), std::invalid_argument);
+}
+
+// Test non-square matrix.
+TEST(findMinPathTest, HandlesNonSquareMatrix) {
+  std::vector<std::vector<int>> matrix = {{1, 3, 1}, {1, 5, 1}};
+  EXPECT_THROW(findMinPath<int>(matrix), std::invalid_argument);
+}
+
+// Test empty matrix.
+TEST(findMinPathTest, HandlesEmptyMatrix) {
+  std::vector<std::vector<int>> matrix = {};
+  EXPECT_THROW(findMinPath<int>(matrix), std::invalid_argument);
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

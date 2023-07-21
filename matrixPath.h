@@ -21,11 +21,20 @@ std::pair <T, std::vector<std::pair<int, int>>> findMinPath(std::vector<std::vec
 	
 	std::vector<std::pair<int, int>> path;
     for(int i=1; i<n; i++){
+        if (matrix[i][0]<0){
+            throw std::invalid_argument("Found negative element in position (" + std::to_string(i) + ", " + std::to_string(0) + ").");
+        }
+        if (matrix[0][i]<0){
+            throw std::invalid_argument("Found negative element in position (" + std::to_string(0) + ", " + std::to_string(i) + ").");
+        }
         matrix[i][0] += matrix[i-1][0];
         matrix[0][i] = -(std::abs(matrix[0][i-1])+std::abs(matrix[0][i]));
     }
     for(int i=1; i<n; i++){
         for(int j=1; j<n; j++){
+            if (matrix[i][j]<0){
+                throw std::invalid_argument("Found negative element in position (" + std::to_string(i) + ", " + std::to_string(j) + ").");
+            }
             if(std::abs(matrix[i][j-1]) < std::abs(matrix[i-1][j])){
                 matrix[i][j] = -std::abs(matrix[i][j-1]) - matrix[i][j];
             } else {
