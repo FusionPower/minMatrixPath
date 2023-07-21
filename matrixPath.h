@@ -11,7 +11,12 @@ Assumptions:
 */
 
 template <typename T>
-std::pair <T, std::vector<std::pair<int, int>>> smallestSum(std::vector<std::vector<T>>& matrix) {
+// Returns minimum path sum and shortest path
+std::pair <T, std::vector<std::pair<int, int>>> findMinPath(std::vector<std::vector<T>>& matrix) {
+    if (matrix.empty() || matrix.size() != matrix[0].size()) {
+        throw std::invalid_argument("Matrix must be non-empty and square.");
+    }
+    
     int n = matrix.size();
 	
 	std::vector<std::pair<int, int>> path;
