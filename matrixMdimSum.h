@@ -86,7 +86,6 @@ void preprocessMatrix(const std::vector<T>& vec, Matrix& matrix, std::vector<int
     Recursively finds the elements on the matrix
     */ 
     int n = vec.size();
-    // Get a matrix position to explore
     for (int i = 0; i < n; i++) {
         indexes.push_back(i);
         preprocessMatrix(vec[i], matrix, indexes);
@@ -126,7 +125,6 @@ bool hasValidDims(std::vector<T>& matrix, int n, int m){
     return hasValidDims(matrix[0], n, m-1);
 }
 
-
 template<typename T>
 variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     /*
@@ -135,15 +133,11 @@ variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     if (!hasValidDims(matrix, n, m)) {
         throw std::invalid_argument("Matrix is not N^M dims.");
     }
-
-    // Initialize vectors for starting and ending positions
     std::vector<int> startIndices (m, 0);
     std::vector<int> endIndices (m, n-1);
-    // Initialize indexes util for matrix preprocess
+    // Initialize indexes utility for matrix preprocess
     std::vector<int> indexes;
-    // Preprocess matrix
     preprocessMatrix(matrix, matrix, indexes);
-    // Get answer
     variant_vector min_sum = getWeight(matrix, endIndices);
     return min_sum;
 }
