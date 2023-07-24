@@ -21,11 +21,14 @@ make
 
 ## matrixPath.h
 
+*This works for 2D matrices with positive numbers!*
+
 The main function in this library is findMinPath. The first element in the output is the minSum, the second element is the minPath to get there.
 
 ## matrixMdimSum.h
 
 *WORKS WITH C++ 17 ->*
+*This works for matrices that are N^M dimentional with N>=1 and M>=2*
 
 The main function in this library is findMDimMinSum. This returns the minSum in a variant_vector, so remember to cast it to the type you used in your matrix via:
 
