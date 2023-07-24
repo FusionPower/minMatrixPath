@@ -6,7 +6,7 @@
 // Test when the matrix has one element.
 TEST(findMDimMinSumTest, HandlesSingleElement) {
   std::vector<std::vector<int>> matrix = {{7}};
-  auto result = findMDimMinSum(matrix, 1, 1);
+  auto result = findMDimMinSum(matrix, 1, 2);
   EXPECT_EQ(std::get<int>(result), 7);
 }
 
@@ -27,7 +27,7 @@ TEST(findMDimMinSumTest, HandlesThreeByThreeMatrix) {
         {1, 5, 1}, 
         {4, 2, 1}
     };
-    auto result = findMDimMinSum(matrix, 3, 3);
+    auto result = findMDimMinSum(matrix, 3, 2);
     EXPECT_EQ(std::get<int>(result), 7);
 }
 
@@ -148,4 +148,20 @@ TEST(findMDimMinSumTest, HandlesThreeByThreeByThreeMatrixUnsigned) {
   EXPECT_EQ(std::get<unsigned>(result), 9);
 }
 
+
+// Test invalid arg when matrix is 3x4
+TEST(findMDimMinSumTest, HandlesThreeByFourMatrix) {
+  std::vector<std::vector<int>> matrix = {
+    {1, 3, 1, 1}, 
+    {1, 5, 1, 1}, 
+    {4, 2, 1, 1}
+  };
+  EXPECT_THROW(findMDimMinSum(matrix, 3, 2), std::invalid_argument);
+}
+
+// Test invalid arg when matrix is null
+TEST(findMDimMinSumTest, HandlesNullMatrix) {
+  std::vector<std::vector<int>> matrix = {};
+  EXPECT_THROW(findMDimMinSum(matrix, 3, 2), std::invalid_argument);
+}
 

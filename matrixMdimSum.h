@@ -110,10 +110,32 @@ void printFlattenedMatrix(const std::vector<T>& vec, std::vector<int> indexes) {
 }
 
 template<typename T>
+bool hasValidDims(T& el, int n, int m){
+    if (m == 0){
+        return true;
+    }
+    return false;
+    }
+
+
+template<typename T>
+bool hasValidDims(std::vector<T>& matrix, int n, int m){
+    if (matrix.size() != n){
+        return false;
+    }
+    return hasValidDims(matrix[0], n, m-1);
+}
+
+
+template<typename T>
 variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     /*
     Returns minimum path sum from an N^M matrix
     */ 
+    if (!hasValidDims(matrix, n, m)) {
+        throw std::invalid_argument("Matrix is not N^M dims.");
+    }
+
     // Initialize vectors for starting and ending positions
     std::vector<int> startIndices (m, 0);
     std::vector<int> endIndices (m, n-1);
