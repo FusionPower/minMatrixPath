@@ -83,11 +83,11 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
     }
     
     std::pair<variant_vector, bool> weightaAndRevisedFlag = findBestMicropath(matrix, indexes, m);
-    variant_vector minWeightYet = weightaAndRevisedFlag.first;
+    variant_vector minWeightFound = weightaAndRevisedFlag.first;
     bool revisedOneElement = weightaAndRevisedFlag.second;
     if (revisedOneElement){
-        if (std::holds_alternative<T>(minWeightYet)){
-            T minWeight = std::get<T>(minWeightYet);
+        if (std::holds_alternative<T>(minWeightFound)){
+            T minWeight = std::get<T>(minWeightFound);
             minWeight += cellWeight;
             updateMatrix(matrix, minWeight, indexes);
         }
