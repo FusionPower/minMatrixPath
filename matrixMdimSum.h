@@ -45,7 +45,7 @@ variant_vector getWeight(const std::vector<T>& matrix, const std::vector<int>& i
 }
 
 template<typename Matrix>
-std::pair<variant_vector, bool> findMinWeight(Matrix& matrix, std::vector<int> indexes, int m){
+std::pair<variant_vector, bool> findBestMicropath(Matrix& matrix, std::vector<int> indexes, int m){
     
     // Flag to handle case when minWeightYet has not been initialized
     bool revisedOneElement = false;
@@ -82,7 +82,7 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
         throw std::invalid_argument("Matrix is not N^M dims.");
     }
     
-    std::pair<variant_vector, bool> weightaAndRevisedFlag = findMinWeight(matrix, indexes, m);
+    std::pair<variant_vector, bool> weightaAndRevisedFlag = findBestMicropath(matrix, indexes, m);
     variant_vector minWeightYet = weightaAndRevisedFlag.first;
     bool revisedOneElement = weightaAndRevisedFlag.second;
     if (revisedOneElement){
