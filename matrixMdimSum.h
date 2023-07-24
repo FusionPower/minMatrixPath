@@ -44,17 +44,9 @@ variant_vector getWeight(const std::vector<T>& matrix, const std::vector<int>& i
     return getWeight(matrix[indices[dim]], indices, dim + 1);
 }
 
-template<typename T, typename Matrix>
-void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes, int usrN, int usrM) {
-    /*
-    Once an element is found, it is compared against all the posible paths that lead
-    to that element. The path with the minimum weight is chosen and the matrix is updated.
-    */    
-    int m = indexes.size();
-    if (m!=usrM){
-        throw std::invalid_argument("Matrix is not N^M dims.");
-    }
-
+template<typename Matrix>
+std::pair<variant_vector, bool> findMinWeight(Matrix& matrix, std::vector<int> indexes, int m){
+    
     // Flag to handle case when minWeightYet has not been initialized
     bool revisedOneElement = false;
     variant_vector minWeightYet;
@@ -71,7 +63,28 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
         indexes[i]+=1;
         revisedOneElement = true;
     }
-    // update the matrix current cell with the min weight
+    if (revisedOneElement){
+        return std::make_pair(minWeightYet, true);
+    }
+    else {
+        return std::make_pair(0, false);
+    }
+}
+
+template<typename T, typename Matrix>
+void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes, int usrN, int usrM) {
+    /*
+    Once an element is found, it is compared against all the posible paths that lead
+    to that element. The path with the minimum weight is chosen and the matrix is updated.
+    */    
+    int m = indexes.size();
+    if (m!=usrM){
+        throw std::invalid_argument("Matrix is not N^M dims.");
+    }
+    
+    std::pair<variant_vector, bool> weightaAndRevisedFlag = findMinWeight(matrix, indexes, m);
+    variant_vector minWeightYet = weightaAndRevisedFlag.first;
+    bool revisedOneElement = weightaAndRevisedFlag.second;
     if (revisedOneElement){
         if (std::holds_alternative<T>(minWeightYet)){
             T minWeight = std::get<T>(minWeightYet);
@@ -79,7 +92,6 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
             updateMatrix(matrix, minWeight, indexes);
         }
     }
-    
 }
 
 template<typename T, typename Matrix>
