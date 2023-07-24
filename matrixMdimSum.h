@@ -54,12 +54,12 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
     if (m!=usrM){
         throw std::invalid_argument("Matrix is not N^M dims.");
     }
-    variant_vector minWeightYet;
-    int minIndex = -1;
-    // Flag to initialize element the minWeightYet
-    bool revisedOneElement = false;
 
-    // Find the min weight that this cell should choose
+    // Flag to handle case when minWeightYet has not been initialized
+    bool revisedOneElement = false;
+    variant_vector minWeightYet;
+
+    // Find the min weight that leads to this cell from the possible cells that lead to it
     for (int i = 0; i < m; i++) {
         if (indexes[i]==0)
             continue;
@@ -67,7 +67,6 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
         variant_vector weightFound = getWeight(matrix,indexes);
         if (!revisedOneElement || weightFound < minWeightYet){
             minWeightYet = weightFound;
-            minIndex = i;
         }
         indexes[i]+=1;
         revisedOneElement = true;
