@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <variant>
 
-using variant_vector = std::variant<int, float, double>;
+using variant_vector = std::variant<int, long, unsigned, short, float, double>;
 
 template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
@@ -19,7 +19,9 @@ auto variant_visitor = overloaded{
     [](int arg) { std::cout << arg; },
     [](float arg) { std::cout << arg; },
     [](double arg) { std::cout << arg; },
-
+    [](long arg) { std::cout << arg; },
+    [](unsigned arg) { std::cout << arg; },
+    [](short arg) { std::cout << arg; },
 };
 
 template<typename T>
@@ -65,7 +67,7 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
     }
     // update the matrix current cell with the min weight
     if (revisedOneElement){
-        if (std::holds_alternative<int>(minWeightYet)){
+        if (std::holds_alternative<T>(minWeightYet)){
             T minWeight = std::get<T>(minWeightYet);
             minWeight += cellWeight;
             updateMatrix(matrix, minWeight, indexes);

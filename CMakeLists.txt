@@ -38,9 +38,9 @@ add_executable(MatrixPathTest
 target_link_libraries(MatrixPathTest gtest_main)
 
 # Add your second .cpp file
-add_executable(matrixMdimSumTest
+add_executable(MatrixMdimSumTest
     matrixMdimSum_test.cpp
 )
 
 # Link against GoogleTest library
-target_link_libraries(matrixMdimSumTest gtest_main)
+target_link_libraries(MatrixMdimSumTest gtest_main)
