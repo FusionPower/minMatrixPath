@@ -133,12 +133,12 @@ variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     if (!hasValidDims(matrix, n, m)) {
         throw std::invalid_argument("Matrix is not N^M dims.");
     }
-    std::vector<int> startIndices (m, 0);
-    std::vector<int> endIndices (m, n-1);
     // Initialize indexes utility for matrix preprocess
     std::vector<int> indexes;
     preprocessMatrix(matrix, matrix, indexes);
-    variant_vector min_sum = getWeight(matrix, endIndices);
+
+    std::vector<int> endingIndex (m, n-1);
+    variant_vector min_sum = getWeight(matrix, endingIndex);
     return min_sum;
 }
 
