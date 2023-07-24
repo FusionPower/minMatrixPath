@@ -1,5 +1,5 @@
-#ifndef MDIMMATRIXPATH_H_
-#define MDIMMATRIXPATH_H_
+#ifndef MDIMMATRIXSUM_H_
+#define MDIMMATRIXSUM_H_
 
 
 #include <vector>
@@ -129,4 +129,4 @@ variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     return min_sum;
 }
 
-#endif // MDIMMATRIXPATH_H_
+#endif // MDIMMATRIXSUM_H_

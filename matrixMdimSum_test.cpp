@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <vector>
-#include "matrixMdimPath.h"
+#include "matrixMdimSum.h"
 
 
 // Test when the matrix has one element.
