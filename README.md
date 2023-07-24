@@ -25,6 +25,8 @@ The main function in this library is findMinPath. The first element in the outpu
 
 ## matrixMdimSum.h
 
+*WORKS WITH C++ 17 ->*
+
 The main function in this library is findMDimMinSum. This returns the minSum in a variant_vector, so remember to cast it to the type you used in your matrix via:
 
 ```cpp
