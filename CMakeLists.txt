@@ -36,3 +36,11 @@ add_executable(MatrixPathTest
 
 # Link against GoogleTest library
 target_link_libraries(MatrixPathTest gtest_main)
+
+# Add your second .cpp file
+add_executable(matrixMdimPathTest
+    matrixMdimPath_test.cpp
+)
+
+# Link against GoogleTest library
+target_link_libraries(matrixMdimPathTest gtest_main)

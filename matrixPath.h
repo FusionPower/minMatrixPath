@@ -61,7 +61,7 @@ std::vector<std::pair<int, int>> backtrackPath(std::vector<std::vector<T>>& matr
 	}
 	std::reverse(path.begin(), path.end());
     return path;
-    }
+}
 
 template <typename T>
 std::pair <T, std::vector<std::pair<int, int>>> findMinPath(std::vector<std::vector<T>>& matrix) {
