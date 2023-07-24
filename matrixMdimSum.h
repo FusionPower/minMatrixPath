@@ -45,12 +45,15 @@ variant_vector getWeight(const std::vector<T>& matrix, const std::vector<int>& i
 }
 
 template<typename T, typename Matrix>
-void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes) {
+void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes, int usrN, int usrM) {
     /*
     Once an element is found, it is compared against all the posible paths that lead
     to that element. The path with the minimum weight is chosen and the matrix is updated.
     */    
     int m = indexes.size();
+    if (m!=usrM){
+        throw std::invalid_argument("Matrix is not N^M dims.");
+    }
     variant_vector minWeightYet;
     int minIndex = -1;
     // Flag to initialize element the minWeightYet
@@ -81,14 +84,17 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
 }
 
 template<typename T, typename Matrix>
-void preprocessMatrix(const std::vector<T>& vec, Matrix& matrix, std::vector<int> indexes) {
+void preprocessMatrix(const std::vector<T>& vec, Matrix& matrix, std::vector<int> indexes, int usrN, int usrM) {
     /*
     Recursively finds the elements on the matrix
     */ 
     int n = vec.size();
+    if (n!=usrN){
+        throw std::invalid_argument("Matrix is not N^M dims.");
+    }
     for (int i = 0; i < n; i++) {
         indexes.push_back(i);
-        preprocessMatrix(vec[i], matrix, indexes);
+        preprocessMatrix(vec[i], matrix, indexes, usrN, usrM);
         indexes.pop_back();
     }
 }
@@ -135,7 +141,7 @@ variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
     }
     // Initialize indexes utility for matrix preprocess
     std::vector<int> indexes;
-    preprocessMatrix(matrix, matrix, indexes);
+    preprocessMatrix(matrix, matrix, indexes, n, m);
 
     std::vector<int> endingIndex (m, n-1);
     variant_vector min_sum = getWeight(matrix, endingIndex);
