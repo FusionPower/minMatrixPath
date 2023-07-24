@@ -16,3 +16,18 @@ cd build
 cmake ..
 make
 ./MatrixPathTest
+./MatrixMdimSumTest
+```
+
+## matrixPath.h
+
+The main function in this library is findMinPath. The first element in the output is the minSum, the second element is the minPath to get there.
+
+## matrixMdimSum.h
+
+The main function in this library is findMDimMinSum. This returns the minSum in a variant_vector, so remember to cast it to the type you used in your matrix via:
+
+```cpp
+std::get<int>(result)
+```
+
