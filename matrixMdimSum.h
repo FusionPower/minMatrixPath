@@ -45,7 +45,11 @@ variant_vector getWeight(const std::vector<T>& matrix, const std::vector<int>& i
 }
 
 template<typename T, typename Matrix>
-void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes) {    
+void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> indexes) {
+    /*
+    Once an element is found, it is compared against all the posible paths that lead
+    to that element. The path with the minimum weight is chosen and the matrix is updated.
+    */    
     int m = indexes.size();
     variant_vector minWeightYet;
     int minIndex = -1;
@@ -78,6 +82,9 @@ void preprocessMatrix(const T& cellWeight, Matrix& matrix, std::vector<int> inde
 
 template<typename T, typename Matrix>
 void preprocessMatrix(const std::vector<T>& vec, Matrix& matrix, std::vector<int> indexes) {
+    /*
+    Recursively finds the elements on the matrix
+    */ 
     int n = vec.size();
     // Get a matrix position to explore
     for (int i = 0; i < n; i++) {
@@ -85,21 +92,6 @@ void preprocessMatrix(const std::vector<T>& vec, Matrix& matrix, std::vector<int
         preprocessMatrix(vec[i], matrix, indexes);
         indexes.pop_back();
     }
-}
-
-template<typename T>
-std::vector<T> copyWithMaxValue(const std::vector<T>& original) {
-    std::vector<T> copy(original.size(), std::numeric_limits<T>::max());
-    return copy;
-}
-
-template<typename T>
-std::vector<std::vector<T>> copyWithMaxValue(const std::vector<std::vector<T>>& original) {
-    std::vector<std::vector<T>> copy;
-    for (const auto& inner_vector : original) {
-        copy.push_back(copyWithMaxValue(inner_vector));
-    }
-    return copy;
 }
 
 template<typename T>
@@ -119,6 +111,9 @@ void printFlattenedMatrix(const std::vector<T>& vec, std::vector<int> indexes) {
 
 template<typename T>
 variant_vector findMDimMinSum(std::vector<T>& matrix, int n, int m) {
+    /*
+    Returns minimum path sum from an N^M matrix
+    */ 
     // Initialize vectors for starting and ending positions
     std::vector<int> startIndices (m, 0);
     std::vector<int> endIndices (m, n-1);
