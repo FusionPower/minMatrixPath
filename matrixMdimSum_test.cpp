@@ -164,4 +164,3 @@ TEST(findMDimMinSumTest, HandlesNullMatrix) {
   std::vector<std::vector<int>> matrix = {};
   EXPECT_THROW(findMDimMinSum(matrix, 3, 2), std::invalid_argument);
 }
-

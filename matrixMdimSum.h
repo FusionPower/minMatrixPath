@@ -6,6 +6,13 @@
 #include <iostream>
 #include <type_traits>
 #include <variant>
+#include <stdexcept>
+#include <utility>
+
+/*
+Assumptions:
+- matrix must be N^M dims
+*/
 
 using variant_vector = std::variant<int, long, unsigned, short, float, double>;
 
